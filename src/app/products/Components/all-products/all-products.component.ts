@@ -1,11 +1,19 @@
 import { Component, importProvidersFrom, inject } from '@angular/core';
 import { ProductsService } from '../../Services/products.service';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.component';
+import { SelectComponent } from '../../../shared/Components/select/select.component';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-all-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    SpinnerComponent,
+    SelectComponent,
+    ProductComponent
+  ],
   templateUrl: './all-products.component.html',
   styleUrl: './all-products.component.css'
 })
@@ -14,8 +22,10 @@ import { CommonModule } from '@angular/common';
 export class AllProductsComponent {
 
   constructor(private service: ProductsService) {}
+  loading:boolean = false;
   products: any [] = [];
   categories: any [] = [];
+  title = "Select Category";
 
 
   ngOnInit() : void {
@@ -24,30 +34,31 @@ export class AllProductsComponent {
   }
 
   getProducts() {
+    this.loading = true
     this.service.getAllProducts().subscribe((data: any) => {
       this.products = data
+      this.loading = false
     });
-    console.log(this.products)
   }
 getCategories() {
+  this.loading = true
   this.service.getCategories().subscribe((data: any) => {
     this.categories = data
+    this.loading = false
   });
 }
   filterCategory(event:any) {
-    if (event.target.value === 'products') {
-      this.getProducts();
-    }else{
       let value = event.target.value;
-      this.getProductsByCategory(value);
-    }
+      (value === "all") ? this.getProducts() : this.getProductsByCategory(value);
+
 
 }
 
 getProductsByCategory(category: string) {
+  this.loading = true;
   this.service.getProductsByCategory(category).subscribe((data: any) => {
     this.products = data
+    this.loading = false
   });
 }
 }
-

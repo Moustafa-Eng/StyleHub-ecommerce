@@ -1,0 +1,29 @@
+.card-body{
+  text-align: center;
+  height: 200px;
+}
+.description{
+  height: 50px;
+  overflow: hidden;
+}
+.card-title{
+  height: 50px;
+  overflow: hidden;
+}
+.btn-success{
+  background-color: var(--main-color);
+  border: none;
+}
+.btn-success:hover{
+  background-color: #3d3d3d;
+}
+.card{
+  border-radius: 15px;
+  transition: 0.5s;
+}
+.card:hover{
+  transform: scale(1.03);
+}
+img{
+  border-radius: 15px;
+}
