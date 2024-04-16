@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.component';
 import { SelectComponent } from '../../../shared/Components/select/select.component';
 import { ProductComponent } from '../product/product.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-all-products',
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     SpinnerComponent,
     SelectComponent,
     ProductComponent

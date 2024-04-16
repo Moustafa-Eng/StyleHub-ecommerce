@@ -19,4 +19,8 @@ export class ProductsService {
   getProductsByCategory(category: string) {
     return this.httpClient.get(`https://fakestoreapi.com/products/category/${category}`);
   }
+
+  getSingleProduct(id: number) {
+    return this.httpClient.get(`https://fakestoreapi.com/products/${id}`);
+  }
 }

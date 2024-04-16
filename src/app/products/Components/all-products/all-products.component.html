@@ -1,7 +1,7 @@
 <app-select [categories]="categories" [title]="title" (selectedValue)="filterCategory($event)"></app-select>
 
 <div class="row">
-    <div class="col-md-6 col-lg-4 col-xl-3  my-3" *ngFor="let product of products;">
+    <div class="col-md-6 col-lg-4 col-xl-3  my-3" *ngFor="let product of products;" routerLink="/details/{{product.id}}" >
       <app-product [product]="product"></app-product>
     </div>
 </div>

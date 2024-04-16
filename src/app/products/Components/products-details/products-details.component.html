@@ -1,1 +1,63 @@
-<p>products-details works!</p>
+<section class="py-5" *ngIf="!loading">
+  <div class="container">
+    <div class="row">
+      <aside class="col-lg-6">
+        <div class="border rounded-4 mb-3 d-flex justify-content-center">
+            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{product?.image}}" />
+        </div>
+      </aside>
+
+      <main class="col-lg-6">
+        <div class="ps-lg-3">
+          <h4 class="title text-dark">
+            {{product?.title}}
+
+          </h4>
+          <div class="d-flex flex-row my-3">
+            <div class="text-warning mb-1 me-2">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <span class="ms-1">
+                {{product?.rating.rate}}
+              </span>
+            </div>
+            <span class="text-muted"><i class="bi bi-shopping-basket fa-sm mx-1"></i>{{product?.rating.count}} </span>
+          </div>
+
+          <div class="mb-3">
+            <span class="h5">{{product?.price}} L.E</span>
+          </div>
+
+          <p>
+            {{product?.description}}
+          </p>
+
+          <div class="row">
+            <dt class="col-1">Type:</dt>
+            <dd class="col-11">{{product?.category}}</dd>
+          </div>
+
+          <hr />
+
+          <div class="row mb-4">
+
+            <!-- col.// -->
+            <div class="col-md-4 col-6 mb-3">
+              <label class="mb-2 d-block">Quantity</label>
+              <div class="input-group mb-3" style="width: 170px;">
+                <input type="number" class="form-control text-center border border-secondary" [(ngModel)]="quantity"/>
+              </div>
+            </div>
+
+          </div>
+          <a href="#" class="btn btn-primary shadow-0 mx-1"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+          <a href="#" class="btn btn-light border border-secondary icon-hover px-3"> <i class="bi bi-heart-fill"></i> Save </a>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+<app-spinner *ngIf="loading"></app-spinner>
