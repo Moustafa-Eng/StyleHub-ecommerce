@@ -42,18 +42,18 @@ export class ProductsDetailsComponent {
   increaseQuantity() {
     this.quantity++;
     // check if product is added to cart, then call addToCartService
-    if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
-      this.sharedService.addToCart({product:this.product, quantity: this.quantity});
-  }
+    //if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
+      //this.sharedService.addToCart({product:this.product, quantity: this.quantity});
+  //}
 }
 
   decreaseQuantity() {
     if (this.quantity > 1) {
       this.quantity--;
     }
-    if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
-      this.sharedService.addToCart({product:this.product, quantity: this.quantity});
-  }
+    //if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
+      //this.sharedService.addToCart({product:this.product, quantity: this.quantity});
+  //}
   }
 
   addToCart() {
