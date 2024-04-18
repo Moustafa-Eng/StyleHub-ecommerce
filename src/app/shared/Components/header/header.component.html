@@ -1,16 +1,13 @@
 <nav class="navbar navbar-expand-lg container-fluid">
   <div class="container">
-    <a class="navbar-brand text-white"routerLink="/products">StyleHub</a>
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav align-items-center">
-        <a class="nav-link text-white me-5" routerLink="/products" routerLinkActive="router-link-active">Products</a>
-        <a class="nav-link text-white me-5" routerLink="/products" routerLinkActive="router-link-active"><i class="bi bi-heart"></i> Wishlist</a>
-        <a class="nav-link text-white me-5" routerLink="/carts" routerLinkActive="router-link-active"><i class="bi bi-cart3"></i> Cart</a>
-        <a class="nav-link text-white me-5" routerLink="/login" routerLinkActive="router-link-active"><i class="bi bi-person"></i> login</a>
-      </div>
+
+    <a class="navbar-brand text-white fw-bolder" routerLink="/products">StyleHub</a>
+
+    <div class="d-flex float-end">
+      <a routerLink="/login" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="bi bi-person-fill m-1 me-md-2"></i><p class="d-none d-md-block mb-0">login</p> </a>
+      <a routerLink="/Wishlist" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="bi bi-heart-fill m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
+      <a routerLink="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="bi bi-cart-fill m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
     </div>
+
   </div>
 </nav>

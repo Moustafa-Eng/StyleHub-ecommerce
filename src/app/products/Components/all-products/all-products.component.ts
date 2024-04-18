@@ -5,6 +5,7 @@ import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.com
 import { SelectComponent } from '../../../shared/Components/select/select.component';
 import { ProductComponent } from '../product/product.component';
 import { RouterLink } from '@angular/router';
+import { SharedService } from '../../../shared/Services/shared.service';
 
 @Component({
   selector: 'app-all-products',
@@ -23,11 +24,12 @@ import { RouterLink } from '@angular/router';
 
 export class AllProductsComponent {
 
-  constructor(private service: ProductsService) {}
+  constructor(private service: ProductsService, private sharedService: SharedService) {}
   loading:boolean = false;
   products: any [] = [];
   categories: any [] = [];
   title = "Select Category";
+  cartProudcts: any[] = [];
 
 
   ngOnInit() : void {
@@ -63,4 +65,5 @@ getProductsByCategory(category: string) {
     this.loading = false
   });
 }
+
 }

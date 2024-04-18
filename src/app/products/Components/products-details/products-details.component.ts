@@ -5,6 +5,8 @@ import { ProductsService } from '../../Services/products.service';
 import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedService } from '../../../shared/Services/shared.service';
+
 
 @Component({
   selector: 'app-products-details',
@@ -20,9 +22,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductsDetailsComponent {
 
-  constructor(private activeRoute: ActivatedRoute, private service: ProductsService) {}
-  quantity : number = 1
+  constructor(private activeRoute: ActivatedRoute, private service: ProductsService, private sharedService: SharedService) {}
   product: any;
+  quantity : number = 1;
   loading: boolean = false;
   ngOnInit() : void {
     this.loading = true
@@ -30,8 +32,32 @@ export class ProductsDetailsComponent {
     this.service.getSingleProduct(id).subscribe((data: any) => {
       this.product = data
       this.loading = false
+      console.log(this.quantity)
+
     })
 
+  }
+
+
+  increaseQuantity() {
+    this.quantity++;
+    // check if product is added to cart, then call addToCartService
+    if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
+      this.sharedService.addToCart({product:this.product, quantity: this.quantity});
+  }
+}
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+    if(localStorage.getItem('cart') || null && this.sharedService.cartProducts.find((item: any) => item.product.id === this.product.id)) {
+      this.sharedService.addToCart({product:this.product, quantity: this.quantity});
+  }
+  }
+
+  addToCart() {
+    this.sharedService.addToCart({product:this.product, quantity: this.quantity});
   }
 
 }

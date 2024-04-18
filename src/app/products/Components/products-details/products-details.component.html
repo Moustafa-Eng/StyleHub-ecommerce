@@ -36,8 +36,8 @@
           </p>
 
           <div class="row">
-            <dt class="col-1">Type:</dt>
-            <dd class="col-11">{{product?.category}}</dd>
+            <dt class="col-3">category:</dt>
+            <dd class="col-9">{{product?.category}}</dd>
           </div>
 
           <hr />
@@ -48,13 +48,21 @@
             <div class="col-md-4 col-6 mb-3">
               <label class="mb-2 d-block">Quantity</label>
               <div class="input-group mb-3" style="width: 170px;">
-                <input type="number" class="form-control text-center border border-secondary" [(ngModel)]="quantity"/>
+
+                <button class="btn btn-danger px-3 me-2" style="height: 40px;" (click)="decreaseQuantity()">
+                  <i class="bi bi-dash"></i>
+                </button>
+
+                <input type="number" readonly min="1" class="form-control text-center border border-secondary" [(ngModel)]="quantity"/>
+
+                <button class="btn btn-danger px-3 ms-2" style="height: 40px;" (click)="increaseQuantity()">
+                  <i class="bi bi-plus"></i>
+                </button>
               </div>
             </div>
 
           </div>
-          <a href="#" class="btn btn-primary shadow-0 mx-1"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
-          <a href="#" class="btn btn-light border border-secondary icon-hover px-3"> <i class="bi bi-heart-fill"></i> Save </a>
+          <a href="#" class="btn btn-danger shadow-0 mx-1" (click)="addToCart()"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
         </div>
       </main>
     </div>
