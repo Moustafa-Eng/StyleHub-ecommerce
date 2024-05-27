@@ -1,8 +1,5 @@
 <section class="h-100 gradient-custom">
   <div class="container py-5">
-    <div *ngIf="success" class="alert alert-success fs-5 text-center" role="alert">
-      Your order has been submitted successfully.
-    </div>
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-8">
         <div class="d-flex align-items-center flex-start" routerLink="/products" style="cursor: pointer;">
@@ -100,6 +97,9 @@
               Order Now
             </button>
           </div>
+        </div>
+        <div *ngIf="success" class="alert alert-success fs-5 text-center" role="alert">
+          Your order has been submitted successfully.
         </div>
       </div>
     </div>
