@@ -1,5 +1,9 @@
 <section class="py-5" *ngIf="!loading">
   <div class="container">
+    <div class="d-flex align-items-center flex-start" routerLink="/products" style="cursor: pointer;">
+      <i class="bi bi-arrow-left fs-1"></i>
+      <h5 class="mb-0 mx-1"> Continue shopping</h5>
+    </div>
     <div class="row">
       <aside class="col-lg-6">
         <div class="border rounded-4 mb-3 d-flex justify-content-center">
@@ -60,9 +64,12 @@
                 </button>
               </div>
             </div>
-
           </div>
-          <a href="#" class="btn btn-danger shadow-0 mx-1" (click)="addToCart()"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+
+          <div class="d-flex align-items-center">
+            <button [disabled]="btnDisabled" class="btn btn-danger shadow-0 mx-1" (click)="addToCart()" #disabled> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </button>
+            <span *ngIf="btnDisabled" class="badge bg-success p-2">Product Added To Cart Successfully <i class="bi bi-check-circle-fill"></i></span>
+          </div>
         </div>
       </main>
     </div>

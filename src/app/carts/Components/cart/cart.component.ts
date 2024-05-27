@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.component';
 import { RouterLink } from '@angular/router';
 import { SharedService } from '../../../shared/Services/shared.service';
+import { CartsService } from '../../Services/carts.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,22 +13,23 @@ import { SharedService } from '../../../shared/Services/shared.service';
     CommonModule,
     RouterLink,
     FormsModule,
-    SpinnerComponent
+    SpinnerComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private cartService: CartsService) { }
 
+  // check everywhere you use loaclStorage
   private isLocalStorageAvailable = typeof localStorage !== 'undefined';
   loading = false;
   total = 0;
+  success = false;
 
   cartProducts:any[] = [];
 
-  // check everywhere you use loaclStorage
 
 ngOnInit():void{
   this.getCartProducts();
@@ -74,4 +76,27 @@ ngOnInit():void{
       this.calculateTotal();
     }
   }
+
+  addCartToOrder(){
+
+    let products = this.cartProducts.map(item => {
+      return {
+        productId: item.product.id,
+        quantity: item.quantity
+      }
+    });
+
+
+    let cartModel ={
+      userId: 5,
+      date: new Date(),
+      products: products
+    }
+
+    this.cartService.addNewCart(cartModel).subscribe(res => {
+      this.success = true;
+    });
+  }
+
+
 }

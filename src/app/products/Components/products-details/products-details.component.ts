@@ -1,6 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductComponent } from '../product/product.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../Services/products.service';
 import { SpinnerComponent } from '../../../shared/Components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { SharedService } from '../../../shared/Services/shared.service';
   selector: 'app-products-details',
   standalone: true,
   imports: [
+    RouterLink,
     CommonModule,
     FormsModule,
     ProductComponent,
@@ -21,21 +22,24 @@ import { SharedService } from '../../../shared/Services/shared.service';
   styleUrl: './products-details.component.css'
 })
 export class ProductsDetailsComponent {
+  [x: string]: any;
 
   constructor(private activeRoute: ActivatedRoute, private service: ProductsService, private sharedService: SharedService) {}
+  private isLocalStorageAvailable = typeof localStorage !== 'undefined';
   product: any;
   quantity : number = 1;
   loading: boolean = false;
+  btnDisabled: boolean = false;
+
   ngOnInit() : void {
     this.loading = true
     let id = this.activeRoute.snapshot.params['id'];
     this.service.getSingleProduct(id).subscribe((data: any) => {
       this.product = data
       this.loading = false
-      console.log(this.quantity)
+    });
 
-    })
-
+    this.disableAddToCart();
   }
 
 
@@ -58,6 +62,22 @@ export class ProductsDetailsComponent {
 
   addToCart() {
     this.sharedService.addToCart({product:this.product, quantity: this.quantity});
+    this.disableAddToCart();
   }
 
+
+
+  disableAddToCart(){
+    if (!this.isLocalStorageAvailable) {
+      return;
+    }
+    let cartProducts = JSON.parse(localStorage.getItem('cart') || '[]');
+      let existingProductIndex = cartProducts.findIndex((item: any) => item.product.id === this.product?.id);
+      if (existingProductIndex !== -1) {
+        this.btnDisabled = true;
+      }
+  }
 }
+
+
+
